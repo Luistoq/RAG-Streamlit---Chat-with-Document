@@ -21,26 +21,10 @@ def response_generator(stream):
     for chunk in stream.response_gen:
         yield chunk
 
-@st.cache_resource(show_spinner=False)
+# Loads and indexes Streamlit documentation using Ollama and LlamaIndex.
 def load_data(document, model_name: str) -> VectorStoreIndex:
-    """Loads and indexes Streamlit documentation using Ollama and LlamaIndex.
-
-    This function performs the following actions:
-    1. Initializes an Ollama instance using the provided model name.
-    2. Reads the provided PDF document using SimpleDirectoryReader.
-    3. Splits the loaded document into sentences and generates embeddings.
-    4. Creates a ServiceContext object with all necessary components.
-    5. Creates a VectorStoreIndex instance from the processed documents.
-
-    Args:
-        document (UploadedFile): The uploaded PDF document to be processed.
-        model_name (str): The name of the LLM model to be used by Ollama.
-
-    Returns:
-        VectorStoreIndex: An instance containing the indexed documents and embeddings.
-    """
     # Initialize the large language model (LLM)
-    llm = Ollama(model=model_name, request_timeout=30.0)
+    llm = Ollama(model=model_name, request_timeout=20.0)
 
     # Temporary file to hold the uploaded PDF document
     with NamedTemporaryFile(dir='.', suffix='.pdf') as f:
@@ -58,7 +42,7 @@ def load_data(document, model_name: str) -> VectorStoreIndex:
                 llm=llm,
                 embed_model=embed_model,
                 text_splitter=text_splitter,
-                system_prompt="You are a Python expert and your job is to answer technical questions. Keep your answers technical and based on facts."
+                system_prompt="You are a chatbot assistant and your job is to answer user questions"
             )
 
             # Create a VectorStoreIndex instance
@@ -66,23 +50,9 @@ def load_data(document, model_name: str) -> VectorStoreIndex:
     
     return index
 
+# Controls the main chat application logic using Streamlit and Ollama.
 def main() -> None:
-    """Controls the main chat application logic using Streamlit and Ollama.
-
-    This function orchestrates the chat application with the following tasks:
-    1. Sets up the Streamlit page configuration.
-    2. Manages model selection and stores the chosen model in session state.
-    3. Initializes the chat history list in session state.
-    4. Calls load_data to create a VectorStoreIndex from the provided model name.
-    5. Initializes the chat engine using the VectorStoreIndex instance.
-    6. Displays chat history messages.
-    7. Handles user input and displays messages in the chat interface.
-    8. Generates responses to user prompts and displays them.
-
-    Args:
-        None
-    """
-    st.set_page_config(page_title="Chatbot", page_icon="🦙", layout="centered", initial_sidebar_state="auto")
+    st.set_page_config(page_title="Chat with Docs")
     st.title("RAG-Streamlit---Chat-with-your-Document")
     
     if "activate_chat" not in st.session_state:
@@ -137,7 +107,7 @@ def main() -> None:
                     response = st.write_stream(response_generator(stream))
                 st.session_state.messages.append({"role": "assistant", "content": response})
     else:
-        st.markdown("<span style='font-size:15px;'><b>Upload a PDF to start chatting</b></span>", unsafe_allow_html=True)
+        st.markdown("<span style='font-size:20px;'><b>Upload a PDF to start chatting</b></span>", unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main()
