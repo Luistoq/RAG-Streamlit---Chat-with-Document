@@ -14,8 +14,8 @@ RAG Streamlit - Chat with Document is an interactive chat application that lever
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/rag-docbot.git
-   cd rag-docbot
+   git clone https://github.com/Luistoq/RAG-Streamlit---Chat-with-your-Document.git
+   cd RAG-Streamlit---Chat-with-your-Document
    ```
 
 2. **Create a virtual environment and activate it:**
@@ -82,5 +82,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [Ollama](https://ollama.ai/)
 - [LlamaIndex](https://llama-index.readthedocs.io/)
 - [HuggingFace](https://huggingface.co/)
-
-Feel free to adjust the repository URL, license, and any other specifics to fit your actual project details.
