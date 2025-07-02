@@ -1,5 +1,5 @@
-# RAG-Streamlit---Chat-with-your-Document
-RAG Streamlit - Chat with Document is an interactive chat application that leverages the power of Ollama and LlamaIndex to provide intelligent responses to technical questions based on the content of a provided PDF document. This application is built using Python 3.10 and Streamlit.
+# RAG-DocumentChatbot
+RAG-DocumentChatbot is an interactive chat application that leverages the power of Ollama and LlamaIndex to provide intelligent responses to technical questions based on the content of a provided PDF document. This application is built using Python 3.10 and Streamlit.
 
 ## Features
 
@@ -14,8 +14,8 @@ RAG Streamlit - Chat with Document is an interactive chat application that lever
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Luistoq/RAG-Streamlit---Chat-with-your-Document.git
-   cd RAG-Streamlit---Chat-with-your-Document
+   git clone https://github.com/Luistoq/RAG-DocumentChatbot.git
+   cd RAG-DocumentChatbot
    ```
 
 2. **Create a virtual environment and activate it:**
